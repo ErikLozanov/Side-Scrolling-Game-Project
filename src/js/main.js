@@ -12,4 +12,10 @@ gameStart.addEventListener('click', onGameStart);
 function onGameStart() {
     gameStart.classList.add('hide');
     console.log('hi!');
+
+    const wizardElement = document.createElement('div');
+    wizardElement.classList.add('wizard');
+    wizardElement.style.top = '200px';
+    wizardElement.style.left ='200px';
+    gameArea.appendChild(wizardElement);
 }
