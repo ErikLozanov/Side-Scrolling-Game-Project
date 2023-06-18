@@ -20,8 +20,25 @@ body {
     text-align: center;
     padding: 30px;
     position: absolute;
+    border-radius: 12px;
+
 }
 
 .game-start:hover {
     background-color: green;
+    scale: 1.2;
+    cursor: pointer;
+}
+
+
+.game-score {
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-size: 24px;
+}
+
+
+.hide {
+    display: none;
 }
