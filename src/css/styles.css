@@ -4,7 +4,24 @@ body {
     font-family: consolas;
 }
 
-.game-section {
+.game-area {
     background-color: lightblue;
     height: 100vw;
+    position: relative;
+    width: 100%;
+}
+
+.game-start {
+    width: 30%;
+    background-color: greenyellow;
+    z-index: 1;
+    top: 300px;
+    left: 35%;
+    text-align: center;
+    padding: 30px;
+    position: absolute;
+}
+
+.game-start:hover {
+    background-color: green;
 }
