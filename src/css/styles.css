@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+    font-size: 48px;
+    font-family: consolas;
+}
+
+.game-section {
+    background-color: lightblue;
+    height: 100vw;
+}
