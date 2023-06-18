@@ -19,3 +19,27 @@ function onGameStart() {
     wizardElement.style.left ='200px';
     gameArea.appendChild(wizardElement);
 }
+
+
+//global key listeners
+
+document.addEventListener('keydown', onKeyDown);
+document.addEventListener('keyup', onKeyUp);
+
+function onKeyDown(e) {
+    keys[e.code] = true;
+    console.log(keys);
+}
+function onKeyUp(e) {
+    keys[e.code] = false;
+    console.log(keys);
+}
+
+let keys = {};
+
+
+
+function gameAction() {
+    console.log('action');
+    window.requestAnimationFrame(gameAction);
+}
