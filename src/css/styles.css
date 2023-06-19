@@ -2,6 +2,7 @@ body {
     margin: 0;
     font-size: 48px;
     font-family: consolas;
+    overflow: hidden;
 }
 
 .game-area {
@@ -56,4 +57,20 @@ body {
     z-index: 100;
     position: absolute;
     background-size: cover;
+}
+
+
+
+.wizard-fire {
+    background-image: url(/src/images/wizard-fire.png);
+    background-size: cover;
+}
+
+
+.fire-ball {
+    background-image: url(/src/images/fire-ball.png);
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    position: absolute;
 }

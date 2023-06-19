@@ -64,22 +64,35 @@ function gameAction() {
     if(keys.KeyW && player.y > 0) {
         player.y -= game.speed * game.movingMultiplier;
     }
-    if(keys.KeyS && gameArea.offsetHeight > player.y + player.height) {
+    if(keys.KeyS && gameArea.offsetHeight > player.y + player.height + 15) {
         player.y += game.speed * game.movingMultiplier;
     }
     if(keys.KeyA && player.x > 0) {
         player.x -= game.speed * game.movingMultiplier;
     }
-    if(keys.KeyD && gameArea.offsetWidth > player.x + player.width) {
+    if(keys.KeyD && gameArea.offsetWidth > player.x + player.width + 10) {
         player.x += game.speed * game.movingMultiplier;
     }
 
     // Fireball Shooting
     if(keys.Space) {
         wizardElement.classList.add('wizard-fire');
+        addFireBall();
+
     } else {
         wizardElement.classList.remove('wizard-fire');
     }
+    // Modify fireballs positions
+
+    let fireBalls = document.querySelectorAll('.fire-ball');
+    fireBalls.forEach(fireBall => {
+        fireBall.x +=game.speed;
+        fireBall.style.left = fireBall.x + 'px';
+
+        if(fireBall.x + fireBall.offsetWidth > gameArea.offsetWidth) {
+            fireBall.parentElement.removeChild(fireBall);
+        }
+    })
 
     // Apply gravitation
 
@@ -95,4 +108,15 @@ function gameAction() {
 
     gamePoints.textContent = scene.score;
     window.requestAnimationFrame(gameAction);
+}
+
+function addFireBall() {
+    let fireBall = document.createElement('div');
+    fireBall.classList.add('fire-ball');
+
+    
+    fireBall.style.top = (player.y + player.height /3 - 5) + 'px';
+    fireBall.x = player.x + player.width;
+    fireBall.style.left = fireBall.x + 'px';
+    gameArea.appendChild(fireBall);
 }
