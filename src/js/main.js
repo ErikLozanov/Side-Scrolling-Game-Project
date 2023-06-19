@@ -4,6 +4,7 @@ const gameStart = document.querySelector('.game-start');
 const gameArea = document.querySelector('.game-area');
 const gameOver = document.querySelector('.game-over');
 const gameScore = document.querySelector('.game-score');
+const gamePoints = document.querySelector('.points');
 
 
 gameStart.addEventListener('click', onGameStart);
@@ -50,8 +51,11 @@ let game = {
     speed: 2,
     movingMultiplier: 4
 };
+let scene = {
+    score: 0
+}
 
-
+// game actions
 
 function gameAction() {
     const wizardElement = document.querySelector('.wizard');
@@ -70,6 +74,13 @@ function gameAction() {
         player.x += game.speed * game.movingMultiplier;
     }
 
+    // Fireball Shooting
+    if(keys.Space) {
+        wizardElement.classList.add('wizard-fire');
+    } else {
+        wizardElement.classList.remove('wizard-fire');
+    }
+
     // Apply gravitation
 
     let isInAir = (player.y + player.height) <= gameArea.offsetHeight;
@@ -78,7 +89,10 @@ function gameAction() {
         player.y += game.speed;
     }
 
+    scene.score ++;
     wizardElement.style.top = player.y + 'px';
     wizardElement.style.left = player.x + 'px';
+
+    gamePoints.textContent = scene.score;
     window.requestAnimationFrame(gameAction);
 }
