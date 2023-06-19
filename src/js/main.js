@@ -96,7 +96,7 @@ function gameAction(timestamp) {
         cloud.x -= game.speed;
         cloud.style.left = cloud.x + 'px';
 
-        if(cloud.x + clouds.offsetWidth <= 0) {
+        if(cloud.x + clouds.offsetWidth <= -200) {
             cloud.parentElement.removeChild(cloud);
         }
     })
