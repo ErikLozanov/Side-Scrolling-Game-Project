@@ -70,7 +70,16 @@ body {
 .fire-ball {
     background-image: url(/src/images/fire-ball.png);
     background-size: cover;
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     position: absolute;
+}
+
+.clouds {
+    background-image: url(/src/images/cloud.png);
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    z-index: 0;
 }
