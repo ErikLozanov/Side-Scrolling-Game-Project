@@ -162,13 +162,12 @@ function gameAction(timestamp) {
     })
 
     // IF DEAD
-    if(!scene.isActiveGame) {
-        window.requestAnimationFrame(gameAction);
+
+
+    if(scene.isActiveGame) {
+     window.requestAnimationFrame(gameAction);
     }
-
-
-    window.requestAnimationFrame(gameAction);
-}
+    }
 
 
 
@@ -197,7 +196,7 @@ function addClouds() {
 function addBugs() {
     let bug = document.createElement('div');
     bug.classList.add('bugs');
-    bug.style.top = Math.floor(Math.random() * 1080) + 'px';
+    bug.style.top = Math.floor(Math.random() * 1050) + 'px';
     bug.x = gameArea.offsetWidth;
     bug.style.left = bug.x + 'px';
     gameArea.appendChild(bug);
