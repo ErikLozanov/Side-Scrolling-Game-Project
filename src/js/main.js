@@ -112,7 +112,6 @@ function gameAction(timestamp) {
     if(keys.Space && timestamp - player.lastFiredFireball > game.fireRate) {
         addFireBall();
         player.lastFiredFireball = timestamp;
-        isCollision(wizardElement, wizardElement);
     }
     // Modify fireballs positions
 
@@ -152,7 +151,7 @@ function gameAction(timestamp) {
     let bugs = document.querySelectorAll('.bugs');
     bugs.forEach(bug=>{
         if(isCollision(wizardElement,bug)) {
-            console.log('collision');
+            gameOverAction();
         }
         bug.x -= game.speed;
         bug.style.left = bug.x + 'px';
@@ -161,6 +160,13 @@ function gameAction(timestamp) {
             bug.parentElement.removeChild(bug);
         }
     })
+
+    // IF DEAD
+    if(!scene.isActiveGame) {
+        window.requestAnimationFrame(gameAction);
+    }
+
+
     window.requestAnimationFrame(gameAction);
 }
 
@@ -207,4 +213,10 @@ function isCollision(firstElement, secondElement) {
       firstRect.right < secondRect.left ||
       firstRect.left > secondRect.right
     );
+
+}
+
+function gameOverAction() {
+    scene.isActiveGame = false;
+    gameOver.classList.remove('hide');
 }
