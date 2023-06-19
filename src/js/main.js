@@ -32,7 +32,7 @@ document.addEventListener('keyup', onKeyUp);
 
 function onKeyDown(e) {
     keys[e.code] = true;
-    console.log(keys);
+
 }
 function onKeyUp(e) {
     keys[e.code] = false;
@@ -55,6 +55,8 @@ let game = {
 
 function gameAction() {
     const wizardElement = document.querySelector('.wizard');
+
+    // Borders
     if(keys.KeyW && player.y > 0) {
         player.y -= game.speed * game.movingMultiplier;
     }
@@ -67,9 +69,15 @@ function gameAction() {
     if(keys.KeyD && gameArea.offsetWidth > player.x + player.width) {
         player.x += game.speed * game.movingMultiplier;
     }
-    if(player.y < 0|| player.x < 0) {
 
+    // Apply gravitation
+
+    let isInAir = (player.y + player.height) <= gameArea.offsetHeight;
+
+    if(isInAir) {
+        player.y += game.speed;
     }
+
     wizardElement.style.top = player.y + 'px';
     wizardElement.style.left = player.x + 'px';
     window.requestAnimationFrame(gameAction);
