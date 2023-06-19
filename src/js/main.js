@@ -52,7 +52,7 @@ let player = {
 let game = {
     speed: 2,
     movingMultiplier: 2,
-    fireBallMultiplier: 5,
+    fireBallSpeed: 5,
     fireRate: 1000,
     cloudSpawningRate: 3000,
     pointsAddingSpeed: 300,
@@ -117,7 +117,7 @@ function gameAction(timestamp) {
 
     let fireBalls = document.querySelectorAll('.fire-ball');
     fireBalls.forEach(fireBall => {
-        fireBall.x +=game.speed;
+        fireBall.x +=game.fireBallSpeed;
         fireBall.style.left = fireBall.x + 'px';
 
         if(fireBall.x + fireBall.offsetWidth > gameArea.offsetWidth) {
@@ -153,6 +153,13 @@ function gameAction(timestamp) {
         if(isCollision(wizardElement,bug)) {
             gameOverAction();
         }
+        fireBalls.forEach(fireBall => {
+            if(isCollision(fireBall,bug)) {
+                scene.score += 1000;
+            bug.parentElement.removeChild(bug);
+            fireBall.parentElement.removeChild(fireBall);
+            }
+        })
         bug.x -= game.speed;
         bug.style.left = bug.x + 'px';
 
