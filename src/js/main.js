@@ -40,6 +40,7 @@ function onKeyUp(e) {
 
 }
 
+// GAME OBJECTS
 let keys = {};
 let player = {
     x: Math.floor(Math.random() * 100),
@@ -102,13 +103,14 @@ function gameAction(timestamp) {
         }
     })
     // Fireball Shooting
-
-    if(keys.Space && timestamp - player.lastFiredFireball > game.fireRate) {
+    if(keys.Space) {
         wizardElement.classList.add('wizard-fire');
-        addFireBall();
-        player.lastFiredFireball = timestamp;
     } else {
         wizardElement.classList.remove('wizard-fire');
+    }
+    if(keys.Space && timestamp - player.lastFiredFireball > game.fireRate) {
+        addFireBall();
+        player.lastFiredFireball = timestamp;
     }
     // Modify fireballs positions
 
