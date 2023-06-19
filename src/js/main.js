@@ -54,11 +54,12 @@ let game = {
     fireBallMultiplier: 5,
     fireRate: 1000,
     cloudSpawningRate: 3000,
+    pointsAddingSpeed: 300,
+    lastAddedPoint: 0,
 };
 let scene = {
     score: 0,
     lastSpawnedCloud: 0
-
 }
 
 
@@ -101,6 +102,7 @@ function gameAction(timestamp) {
         }
     })
     // Fireball Shooting
+
     if(keys.Space && timestamp - player.lastFiredFireball > game.fireRate) {
         wizardElement.classList.add('wizard-fire');
         addFireBall();
@@ -127,8 +129,10 @@ function gameAction(timestamp) {
     if(isInAir) {
         player.y += game.speed;
     }
-
-    scene.score ++;
+    if(timestamp - game.lastAddedPoint > game.pointsAddingSpeed) {
+        scene.score ++;
+        game.lastAddedPoint = timestamp;
+    }
     wizardElement.style.top = player.y + 'px';
     wizardElement.style.left = player.x + 'px';
 
