@@ -62,7 +62,8 @@ let game = {
 let scene = {
     score: 0,
     lastSpawnedCloud: 0,
-    lastSpawnedBug: 0
+    lastSpawnedBug: 0,
+    isActiveGame: true
 }
 
 
@@ -111,6 +112,7 @@ function gameAction(timestamp) {
     if(keys.Space && timestamp - player.lastFiredFireball > game.fireRate) {
         addFireBall();
         player.lastFiredFireball = timestamp;
+        isCollision(wizardElement, wizardElement);
     }
     // Modify fireballs positions
 
@@ -149,6 +151,9 @@ function gameAction(timestamp) {
     // MODIFY MOVING BUGS
     let bugs = document.querySelectorAll('.bugs');
     bugs.forEach(bug=>{
+        if(isCollision(wizardElement,bug)) {
+            console.log('collision');
+        }
         bug.x -= game.speed;
         bug.style.left = bug.x + 'px';
 
@@ -190,4 +195,16 @@ function addBugs() {
     bug.x = gameArea.offsetWidth;
     bug.style.left = bug.x + 'px';
     gameArea.appendChild(bug);
+}
+
+function isCollision(firstElement, secondElement) {
+    let firstRect = firstElement.getBoundingClientRect();
+    let secondRect = secondElement.getBoundingClientRect();
+    
+    return !(
+      firstRect.top > secondRect.bottom ||
+      firstRect.bottom < secondRect.top ||
+      firstRect.right < secondRect.left ||
+      firstRect.left > secondRect.right
+    );
 }
