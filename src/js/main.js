@@ -152,7 +152,7 @@ function gameAction(timestamp) {
         bug.x -= game.speed;
         bug.style.left = bug.x + 'px';
 
-        if(bug.x + bugs.offsetWidth <= -200) {
+        if(bug.x + bug.offsetWidth <= -100) {
             bug.parentElement.removeChild(bug);
         }
     })
