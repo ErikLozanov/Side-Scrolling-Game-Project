@@ -57,10 +57,12 @@ let game = {
     cloudSpawningRate: 3000,
     pointsAddingSpeed: 300,
     lastAddedPoint: 0,
+    bugSpawningInterval: 2000,
 };
 let scene = {
     score: 0,
-    lastSpawnedCloud: 0
+    lastSpawnedCloud: 0,
+    lastSpawnedBug: 0
 }
 
 
@@ -69,7 +71,7 @@ let scene = {
 function gameAction(timestamp) {
     const wizardElement = document.querySelector('.wizard');
     const clouds = document.createElement('div');
-
+    const bug = document.createElement('div');
     // Borders
     if(keys.KeyW && player.y > 0) {
         player.y -= game.speed * game.movingMultiplier;
@@ -89,8 +91,6 @@ function gameAction(timestamp) {
         clouds.classList.add('clouds');
         addClouds();
         scene.lastSpawnedCloud = timestamp;
-    } else {
-       clouds.classList.remove('clouds') 
     }
     // Modify moving clouds
     let allClouds = document.querySelectorAll('.clouds');
@@ -139,9 +139,30 @@ function gameAction(timestamp) {
     wizardElement.style.left = player.x + 'px';
 
     gamePoints.textContent = scene.score;
+
+    // BUGS 
+    if(timestamp - scene.lastSpawnedBug > game.bugSpawningInterval) {
+        bug.classList.add('bugs');
+        addBugs();
+        scene.lastSpawnedBug = timestamp;
+    }
+    // MODIFY MOVING BUGS
+    let bugs = document.querySelectorAll('.bugs');
+    bugs.forEach(bug=>{
+        bug.x -= game.speed;
+        bug.style.left = bug.x + 'px';
+
+        if(bug.x + bugs.offsetWidth <= -200) {
+            bug.parentElement.removeChild(bug);
+        }
+    })
     window.requestAnimationFrame(gameAction);
 }
 
+
+
+
+// FUNCTIONS
 function addFireBall() {
     let fireBall = document.createElement('div');
     fireBall.classList.add('fire-ball');
@@ -160,4 +181,13 @@ function addClouds() {
     cloud.x = gameArea.offsetWidth;
     cloud.style.left = cloud.x + 'px';
     gameArea.appendChild(cloud);
+}
+
+function addBugs() {
+    let bug = document.createElement('div');
+    bug.classList.add('bugs');
+    bug.style.top = Math.floor(Math.random() * 1080) + 'px';
+    bug.x = gameArea.offsetWidth;
+    bug.style.left = bug.x + 'px';
+    gameArea.appendChild(bug);
 }

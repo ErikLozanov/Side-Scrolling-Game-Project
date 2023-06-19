@@ -84,3 +84,11 @@ body {
     position: absolute;
     z-index: 0;
 }
+
+.bugs {
+    background-image: url(/src/images/bug.png);
+    background-size: cover;
+    width: 70px;
+    height: 70px;
+    position: absolute;
+}
